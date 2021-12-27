@@ -1,7 +1,8 @@
 import Layout from 'components/Layout'
 import PostsList from 'components/PostsList'
 import type { GetStaticPaths, GetStaticProps } from 'next'
-import { Organisation as OrganisationType, Post} from 'types'
+import { getDomain } from 'utils'
+import type { Organisation as OrganisationType, Post } from 'types'
 import GraphQL from 'utils/GraphQL'
 
 type Props = {
@@ -13,7 +14,17 @@ const Organisation: React.FC<Props> = ({ organisation, posts }) => {
   return (
     <Layout>
       <div className="container max-w-screen-xl mx-auto px-4 mt-8 mb-8">
-        <h1>Organisation: {organisation.name} ({organisation.short_name})</h1>
+        <div className="border-b pb-4 flex flex-row">
+          <div className="mr-4 font-semibold">Organisation: </div>
+          <div>
+            <div>{organisation.name} ({organisation.short_name})</div>
+            {organisation.url
+              ? <a href={organisation.url} className="underline decoration-dotted">
+                  {getDomain(organisation.url)}
+                </a>
+              : null}
+          </div>
+        </div>
         <PostsList posts={posts} />
       </div>
     </Layout>

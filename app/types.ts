@@ -363,6 +363,11 @@ export type DeletePostPayload = {
   post?: Maybe<Post>;
 };
 
+export enum Enum_Response_From {
+  User = 'user',
+  Organisation = 'organisation'
+}
+
 export type Response = {
   __typename?: 'Response';
   id: Scalars['ID'];
@@ -371,8 +376,10 @@ export type Response = {
   title?: Maybe<Scalars['String']>;
   content: Scalars['String'];
   post?: Maybe<Post>;
-  from?: Maybe<Scalars['String']>;
   timestamp?: Maybe<Scalars['DateTime']>;
+  from: Enum_Response_From;
+  user?: Maybe<UsersPermissionsUser>;
+  organisation?: Maybe<Organisation>;
   published_at?: Maybe<Scalars['DateTime']>;
 };
 
@@ -397,8 +404,10 @@ export type ResponseGroupBy = {
   title?: Maybe<Array<Maybe<ResponseConnectionTitle>>>;
   content?: Maybe<Array<Maybe<ResponseConnectionContent>>>;
   post?: Maybe<Array<Maybe<ResponseConnectionPost>>>;
-  from?: Maybe<Array<Maybe<ResponseConnectionFrom>>>;
   timestamp?: Maybe<Array<Maybe<ResponseConnectionTimestamp>>>;
+  from?: Maybe<Array<Maybe<ResponseConnectionFrom>>>;
+  user?: Maybe<Array<Maybe<ResponseConnectionUser>>>;
+  organisation?: Maybe<Array<Maybe<ResponseConnectionOrganisation>>>;
   published_at?: Maybe<Array<Maybe<ResponseConnectionPublished_At>>>;
 };
 
@@ -438,15 +447,27 @@ export type ResponseConnectionPost = {
   connection?: Maybe<ResponseConnection>;
 };
 
+export type ResponseConnectionTimestamp = {
+  __typename?: 'ResponseConnectionTimestamp';
+  key?: Maybe<Scalars['DateTime']>;
+  connection?: Maybe<ResponseConnection>;
+};
+
 export type ResponseConnectionFrom = {
   __typename?: 'ResponseConnectionFrom';
   key?: Maybe<Scalars['String']>;
   connection?: Maybe<ResponseConnection>;
 };
 
-export type ResponseConnectionTimestamp = {
-  __typename?: 'ResponseConnectionTimestamp';
-  key?: Maybe<Scalars['DateTime']>;
+export type ResponseConnectionUser = {
+  __typename?: 'ResponseConnectionUser';
+  key?: Maybe<Scalars['ID']>;
+  connection?: Maybe<ResponseConnection>;
+};
+
+export type ResponseConnectionOrganisation = {
+  __typename?: 'ResponseConnectionOrganisation';
+  key?: Maybe<Scalars['ID']>;
   connection?: Maybe<ResponseConnection>;
 };
 
@@ -460,8 +481,10 @@ export type ResponseInput = {
   title?: InputMaybe<Scalars['String']>;
   content: Scalars['String'];
   post?: InputMaybe<Scalars['ID']>;
-  from?: InputMaybe<Scalars['String']>;
   timestamp?: InputMaybe<Scalars['DateTime']>;
+  from: Enum_Response_From;
+  user?: InputMaybe<Scalars['ID']>;
+  organisation?: InputMaybe<Scalars['ID']>;
   published_at?: InputMaybe<Scalars['DateTime']>;
   created_by?: InputMaybe<Scalars['ID']>;
   updated_by?: InputMaybe<Scalars['ID']>;
@@ -471,8 +494,10 @@ export type EditResponseInput = {
   title?: InputMaybe<Scalars['String']>;
   content?: InputMaybe<Scalars['String']>;
   post?: InputMaybe<Scalars['ID']>;
-  from?: InputMaybe<Scalars['String']>;
   timestamp?: InputMaybe<Scalars['DateTime']>;
+  from?: InputMaybe<Enum_Response_From>;
+  user?: InputMaybe<Scalars['ID']>;
+  organisation?: InputMaybe<Scalars['ID']>;
   published_at?: InputMaybe<Scalars['DateTime']>;
   created_by?: InputMaybe<Scalars['ID']>;
   updated_by?: InputMaybe<Scalars['ID']>;
@@ -1168,7 +1193,7 @@ export type DeleteUserPayload = {
   user?: Maybe<UsersPermissionsUser>;
 };
 
-export type Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Organisation | OrganisationConnection | OrganisationAggregator | OrganisationGroupBy | OrganisationConnectionId | OrganisationConnectionCreated_At | OrganisationConnectionUpdated_At | OrganisationConnectionName | OrganisationConnectionLogo | OrganisationConnectionShort_Name | OrganisationConnectionUrl | OrganisationConnectionPublished_At | CreateOrganisationPayload | UpdateOrganisationPayload | DeleteOrganisationPayload | Post | PostConnection | PostAggregator | PostGroupBy | PostConnectionId | PostConnectionCreated_At | PostConnectionUpdated_At | PostConnectionContent | PostConnectionAuthor | PostConnectionTitle | PostConnectionTo | PostConnectionTimestamp | PostConnectionPublished_At | CreatePostPayload | UpdatePostPayload | DeletePostPayload | Response | ResponseConnection | ResponseAggregator | ResponseGroupBy | ResponseConnectionId | ResponseConnectionCreated_At | ResponseConnectionUpdated_At | ResponseConnectionTitle | ResponseConnectionContent | ResponseConnectionPost | ResponseConnectionFrom | ResponseConnectionTimestamp | ResponseConnectionPublished_At | CreateResponsePayload | UpdateResponsePayload | DeleteResponsePayload | Tag | TagConnection | TagAggregator | TagGroupBy | TagConnectionId | TagConnectionCreated_At | TagConnectionUpdated_At | TagConnectionName | TagConnectionDescription | TagConnectionPublished_At | CreateTagPayload | UpdateTagPayload | DeleteTagPayload | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_At | UploadFileConnectionUpdated_At | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_Metadata | DeleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | CreateRolePayload | UpdateRolePayload | DeleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_At | UsersPermissionsUserConnectionUpdated_At | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | CreateUserPayload | UpdateUserPayload | DeleteUserPayload;
+export type Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Organisation | OrganisationConnection | OrganisationAggregator | OrganisationGroupBy | OrganisationConnectionId | OrganisationConnectionCreated_At | OrganisationConnectionUpdated_At | OrganisationConnectionName | OrganisationConnectionLogo | OrganisationConnectionShort_Name | OrganisationConnectionUrl | OrganisationConnectionPublished_At | CreateOrganisationPayload | UpdateOrganisationPayload | DeleteOrganisationPayload | Post | PostConnection | PostAggregator | PostGroupBy | PostConnectionId | PostConnectionCreated_At | PostConnectionUpdated_At | PostConnectionContent | PostConnectionAuthor | PostConnectionTitle | PostConnectionTo | PostConnectionTimestamp | PostConnectionPublished_At | CreatePostPayload | UpdatePostPayload | DeletePostPayload | Response | ResponseConnection | ResponseAggregator | ResponseGroupBy | ResponseConnectionId | ResponseConnectionCreated_At | ResponseConnectionUpdated_At | ResponseConnectionTitle | ResponseConnectionContent | ResponseConnectionPost | ResponseConnectionTimestamp | ResponseConnectionFrom | ResponseConnectionUser | ResponseConnectionOrganisation | ResponseConnectionPublished_At | CreateResponsePayload | UpdateResponsePayload | DeleteResponsePayload | Tag | TagConnection | TagAggregator | TagGroupBy | TagConnectionId | TagConnectionCreated_At | TagConnectionUpdated_At | TagConnectionName | TagConnectionDescription | TagConnectionPublished_At | CreateTagPayload | UpdateTagPayload | DeleteTagPayload | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_At | UploadFileConnectionUpdated_At | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_Metadata | DeleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | CreateRolePayload | UpdateRolePayload | DeleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_At | UsersPermissionsUserConnectionUpdated_At | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | CreateUserPayload | UpdateUserPayload | DeleteUserPayload;
 
 export type InputId = {
   id: Scalars['ID'];

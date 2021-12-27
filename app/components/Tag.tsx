@@ -1,4 +1,4 @@
-import React from 'react'
+import Link from 'next/link'
 import type { Tag as TagType } from 'types'
 
 interface Props {
@@ -7,9 +7,11 @@ interface Props {
 
 const Tag: React.FC<Props> = ({ tag }) => {
   return (
-    <a className="flex py-1 px-2 border rounded border-neutral-400 border-solid" href="#">
-      {tag.name}
-    </a>
+    <Link href={`/tag/${tag.id}`}>
+      <a className="flex py-1 px-2 border rounded border-neutral-400 border-solid text-sm">
+        {tag.name}
+      </a>
+    </Link>
   )
 }
 

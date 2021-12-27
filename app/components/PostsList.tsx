@@ -3,13 +3,14 @@ import Date from 'utils/Date'
 import Organisation from 'components/Organisation'
 import Tag from 'components/Tag'
 import type { Tag as TagType } from 'types'
+import Link from 'next/link'
 
 interface Props {
   posts: Post[],
 }
 
 const Timestamp: React.FC<{ timestamp: Post['timestamp']}> = ({ timestamp }) => (
-  <div className="justify-self-end" title={timestamp}>
+  <div className="justify-self-end text-sm" title={timestamp}>
     {Date.humanise(timestamp)}
   </div>
 )
@@ -19,9 +20,11 @@ const PostsList: React.FC<Props> = ({ posts }) => {
     <div className="flex flex-col">
       {posts.map((post, index) => (
         <div className={`flex flex-col py-4 ${index === (posts.length - 1) ? `` : `border-b`}`} key={post.id}>
-            <a className="mb-3" href="#">
-              <h2 className="text-2xl">{post.title}</h2>
-            </a>
+            <Link href={`/post/${post.id}`}>
+              <a className="mb-3">
+                <h2 className="text-2xl">{post.title}</h2>
+              </a>
+            </Link>
             <div className="flex flex-row items-center gap-5">
               <div className="flex flex-row">
                 {
