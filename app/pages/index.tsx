@@ -1,8 +1,8 @@
 import type { NextPage, GetStaticProps } from 'next'
-import Header from 'components/Header'
 import GraphQL from 'utils/GraphQL'
 import type { Post } from 'types'
 import PostsList from 'components/PostsList'
+import Layout from 'components/Layout'
 
 interface Props {
   posts: Post[]
@@ -10,12 +10,11 @@ interface Props {
 
 const Home: NextPage<Props> = ({ posts }) => {
   return (
-    <>
-      <Header />
-      <div className="container max-w-screen-lg mx-auto px-4 mt-8 mb-8">
+    <Layout>
+      <div className="container max-w-screen-xl mx-auto px-4 mt-8 mb-8">
         <PostsList posts={posts} />
       </div>
-    </>
+    </Layout>
   )
 }
 
@@ -36,10 +35,7 @@ export const getStaticProps: GetStaticProps = async () => {
           }
           organisations {
             id
-            name
-            logo {
-              url
-            }
+            short_name
           }
           tags {
             id
