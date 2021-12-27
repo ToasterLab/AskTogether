@@ -206,6 +206,8 @@ export type Post = {
   content: Scalars['String'];
   author?: Maybe<UsersPermissionsUser>;
   title: Scalars['String'];
+  to?: Maybe<Scalars['String']>;
+  timestamp?: Maybe<Scalars['DateTime']>;
   published_at?: Maybe<Scalars['DateTime']>;
   organisations?: Maybe<Array<Maybe<Organisation>>>;
   tags?: Maybe<Array<Maybe<Tag>>>;
@@ -248,6 +250,8 @@ export type PostGroupBy = {
   content?: Maybe<Array<Maybe<PostConnectionContent>>>;
   author?: Maybe<Array<Maybe<PostConnectionAuthor>>>;
   title?: Maybe<Array<Maybe<PostConnectionTitle>>>;
+  to?: Maybe<Array<Maybe<PostConnectionTo>>>;
+  timestamp?: Maybe<Array<Maybe<PostConnectionTimestamp>>>;
   published_at?: Maybe<Array<Maybe<PostConnectionPublished_At>>>;
 };
 
@@ -287,6 +291,18 @@ export type PostConnectionTitle = {
   connection?: Maybe<PostConnection>;
 };
 
+export type PostConnectionTo = {
+  __typename?: 'PostConnectionTo';
+  key?: Maybe<Scalars['String']>;
+  connection?: Maybe<PostConnection>;
+};
+
+export type PostConnectionTimestamp = {
+  __typename?: 'PostConnectionTimestamp';
+  key?: Maybe<Scalars['DateTime']>;
+  connection?: Maybe<PostConnection>;
+};
+
 export type PostConnectionPublished_At = {
   __typename?: 'PostConnectionPublished_at';
   key?: Maybe<Scalars['DateTime']>;
@@ -299,6 +315,8 @@ export type PostInput = {
   title: Scalars['String'];
   organisations?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   tags?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  to?: InputMaybe<Scalars['String']>;
+  timestamp?: InputMaybe<Scalars['DateTime']>;
   published_at?: InputMaybe<Scalars['DateTime']>;
   created_by?: InputMaybe<Scalars['ID']>;
   updated_by?: InputMaybe<Scalars['ID']>;
@@ -310,6 +328,8 @@ export type EditPostInput = {
   title?: InputMaybe<Scalars['String']>;
   organisations?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   tags?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  to?: InputMaybe<Scalars['String']>;
+  timestamp?: InputMaybe<Scalars['DateTime']>;
   published_at?: InputMaybe<Scalars['DateTime']>;
   created_by?: InputMaybe<Scalars['ID']>;
   updated_by?: InputMaybe<Scalars['ID']>;
@@ -341,6 +361,149 @@ export type DeletePostInput = {
 export type DeletePostPayload = {
   __typename?: 'deletePostPayload';
   post?: Maybe<Post>;
+};
+
+export type Response = {
+  __typename?: 'Response';
+  id: Scalars['ID'];
+  created_at: Scalars['DateTime'];
+  updated_at: Scalars['DateTime'];
+  title?: Maybe<Scalars['String']>;
+  content: Scalars['String'];
+  post?: Maybe<Post>;
+  from?: Maybe<Scalars['String']>;
+  timestamp?: Maybe<Scalars['DateTime']>;
+  published_at?: Maybe<Scalars['DateTime']>;
+};
+
+export type ResponseConnection = {
+  __typename?: 'ResponseConnection';
+  values?: Maybe<Array<Maybe<Response>>>;
+  groupBy?: Maybe<ResponseGroupBy>;
+  aggregate?: Maybe<ResponseAggregator>;
+};
+
+export type ResponseAggregator = {
+  __typename?: 'ResponseAggregator';
+  count?: Maybe<Scalars['Int']>;
+  totalCount?: Maybe<Scalars['Int']>;
+};
+
+export type ResponseGroupBy = {
+  __typename?: 'ResponseGroupBy';
+  id?: Maybe<Array<Maybe<ResponseConnectionId>>>;
+  created_at?: Maybe<Array<Maybe<ResponseConnectionCreated_At>>>;
+  updated_at?: Maybe<Array<Maybe<ResponseConnectionUpdated_At>>>;
+  title?: Maybe<Array<Maybe<ResponseConnectionTitle>>>;
+  content?: Maybe<Array<Maybe<ResponseConnectionContent>>>;
+  post?: Maybe<Array<Maybe<ResponseConnectionPost>>>;
+  from?: Maybe<Array<Maybe<ResponseConnectionFrom>>>;
+  timestamp?: Maybe<Array<Maybe<ResponseConnectionTimestamp>>>;
+  published_at?: Maybe<Array<Maybe<ResponseConnectionPublished_At>>>;
+};
+
+export type ResponseConnectionId = {
+  __typename?: 'ResponseConnectionId';
+  key?: Maybe<Scalars['ID']>;
+  connection?: Maybe<ResponseConnection>;
+};
+
+export type ResponseConnectionCreated_At = {
+  __typename?: 'ResponseConnectionCreated_at';
+  key?: Maybe<Scalars['DateTime']>;
+  connection?: Maybe<ResponseConnection>;
+};
+
+export type ResponseConnectionUpdated_At = {
+  __typename?: 'ResponseConnectionUpdated_at';
+  key?: Maybe<Scalars['DateTime']>;
+  connection?: Maybe<ResponseConnection>;
+};
+
+export type ResponseConnectionTitle = {
+  __typename?: 'ResponseConnectionTitle';
+  key?: Maybe<Scalars['String']>;
+  connection?: Maybe<ResponseConnection>;
+};
+
+export type ResponseConnectionContent = {
+  __typename?: 'ResponseConnectionContent';
+  key?: Maybe<Scalars['String']>;
+  connection?: Maybe<ResponseConnection>;
+};
+
+export type ResponseConnectionPost = {
+  __typename?: 'ResponseConnectionPost';
+  key?: Maybe<Scalars['ID']>;
+  connection?: Maybe<ResponseConnection>;
+};
+
+export type ResponseConnectionFrom = {
+  __typename?: 'ResponseConnectionFrom';
+  key?: Maybe<Scalars['String']>;
+  connection?: Maybe<ResponseConnection>;
+};
+
+export type ResponseConnectionTimestamp = {
+  __typename?: 'ResponseConnectionTimestamp';
+  key?: Maybe<Scalars['DateTime']>;
+  connection?: Maybe<ResponseConnection>;
+};
+
+export type ResponseConnectionPublished_At = {
+  __typename?: 'ResponseConnectionPublished_at';
+  key?: Maybe<Scalars['DateTime']>;
+  connection?: Maybe<ResponseConnection>;
+};
+
+export type ResponseInput = {
+  title?: InputMaybe<Scalars['String']>;
+  content: Scalars['String'];
+  post?: InputMaybe<Scalars['ID']>;
+  from?: InputMaybe<Scalars['String']>;
+  timestamp?: InputMaybe<Scalars['DateTime']>;
+  published_at?: InputMaybe<Scalars['DateTime']>;
+  created_by?: InputMaybe<Scalars['ID']>;
+  updated_by?: InputMaybe<Scalars['ID']>;
+};
+
+export type EditResponseInput = {
+  title?: InputMaybe<Scalars['String']>;
+  content?: InputMaybe<Scalars['String']>;
+  post?: InputMaybe<Scalars['ID']>;
+  from?: InputMaybe<Scalars['String']>;
+  timestamp?: InputMaybe<Scalars['DateTime']>;
+  published_at?: InputMaybe<Scalars['DateTime']>;
+  created_by?: InputMaybe<Scalars['ID']>;
+  updated_by?: InputMaybe<Scalars['ID']>;
+};
+
+export type CreateResponseInput = {
+  data?: InputMaybe<ResponseInput>;
+};
+
+export type CreateResponsePayload = {
+  __typename?: 'createResponsePayload';
+  response?: Maybe<Response>;
+};
+
+export type UpdateResponseInput = {
+  where?: InputMaybe<InputId>;
+  data?: InputMaybe<EditResponseInput>;
+};
+
+export type UpdateResponsePayload = {
+  __typename?: 'updateResponsePayload';
+  response?: Maybe<Response>;
+};
+
+export type DeleteResponseInput = {
+  where?: InputMaybe<InputId>;
+};
+
+export type DeleteResponsePayload = {
+  __typename?: 'deleteResponsePayload';
+  response?: Maybe<Response>;
 };
 
 export type Tag = {
@@ -1005,7 +1168,7 @@ export type DeleteUserPayload = {
   user?: Maybe<UsersPermissionsUser>;
 };
 
-export type Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Organisation | OrganisationConnection | OrganisationAggregator | OrganisationGroupBy | OrganisationConnectionId | OrganisationConnectionCreated_At | OrganisationConnectionUpdated_At | OrganisationConnectionName | OrganisationConnectionLogo | OrganisationConnectionShort_Name | OrganisationConnectionUrl | OrganisationConnectionPublished_At | CreateOrganisationPayload | UpdateOrganisationPayload | DeleteOrganisationPayload | Post | PostConnection | PostAggregator | PostGroupBy | PostConnectionId | PostConnectionCreated_At | PostConnectionUpdated_At | PostConnectionContent | PostConnectionAuthor | PostConnectionTitle | PostConnectionPublished_At | CreatePostPayload | UpdatePostPayload | DeletePostPayload | Tag | TagConnection | TagAggregator | TagGroupBy | TagConnectionId | TagConnectionCreated_At | TagConnectionUpdated_At | TagConnectionName | TagConnectionDescription | TagConnectionPublished_At | CreateTagPayload | UpdateTagPayload | DeleteTagPayload | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_At | UploadFileConnectionUpdated_At | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_Metadata | DeleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | CreateRolePayload | UpdateRolePayload | DeleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_At | UsersPermissionsUserConnectionUpdated_At | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | CreateUserPayload | UpdateUserPayload | DeleteUserPayload;
+export type Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Organisation | OrganisationConnection | OrganisationAggregator | OrganisationGroupBy | OrganisationConnectionId | OrganisationConnectionCreated_At | OrganisationConnectionUpdated_At | OrganisationConnectionName | OrganisationConnectionLogo | OrganisationConnectionShort_Name | OrganisationConnectionUrl | OrganisationConnectionPublished_At | CreateOrganisationPayload | UpdateOrganisationPayload | DeleteOrganisationPayload | Post | PostConnection | PostAggregator | PostGroupBy | PostConnectionId | PostConnectionCreated_At | PostConnectionUpdated_At | PostConnectionContent | PostConnectionAuthor | PostConnectionTitle | PostConnectionTo | PostConnectionTimestamp | PostConnectionPublished_At | CreatePostPayload | UpdatePostPayload | DeletePostPayload | Response | ResponseConnection | ResponseAggregator | ResponseGroupBy | ResponseConnectionId | ResponseConnectionCreated_At | ResponseConnectionUpdated_At | ResponseConnectionTitle | ResponseConnectionContent | ResponseConnectionPost | ResponseConnectionFrom | ResponseConnectionTimestamp | ResponseConnectionPublished_At | CreateResponsePayload | UpdateResponsePayload | DeleteResponsePayload | Tag | TagConnection | TagAggregator | TagGroupBy | TagConnectionId | TagConnectionCreated_At | TagConnectionUpdated_At | TagConnectionName | TagConnectionDescription | TagConnectionPublished_At | CreateTagPayload | UpdateTagPayload | DeleteTagPayload | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_At | UploadFileConnectionUpdated_At | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_Metadata | DeleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | CreateRolePayload | UpdateRolePayload | DeleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_At | UsersPermissionsUserConnectionUpdated_At | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | CreateUserPayload | UpdateUserPayload | DeleteUserPayload;
 
 export type InputId = {
   id: Scalars['ID'];
@@ -1032,6 +1195,9 @@ export type Query = {
   post?: Maybe<Post>;
   posts?: Maybe<Array<Maybe<Post>>>;
   postsConnection?: Maybe<PostConnection>;
+  response?: Maybe<Response>;
+  responses?: Maybe<Array<Maybe<Response>>>;
+  responsesConnection?: Maybe<ResponseConnection>;
   tag?: Maybe<Tag>;
   tags?: Maybe<Array<Maybe<Tag>>>;
   tagsConnection?: Maybe<TagConnection>;
@@ -1086,6 +1252,29 @@ export type QueryPostsArgs = {
 
 
 export type QueryPostsConnectionArgs = {
+  sort?: InputMaybe<Scalars['String']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
+};
+
+
+export type QueryResponseArgs = {
+  id: Scalars['ID'];
+  publicationState?: InputMaybe<PublicationState>;
+};
+
+
+export type QueryResponsesArgs = {
+  sort?: InputMaybe<Scalars['String']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
+  publicationState?: InputMaybe<PublicationState>;
+};
+
+
+export type QueryResponsesConnectionArgs = {
   sort?: InputMaybe<Scalars['String']>;
   limit?: InputMaybe<Scalars['Int']>;
   start?: InputMaybe<Scalars['Int']>;
@@ -1186,6 +1375,9 @@ export type Mutation = {
   createPost?: Maybe<CreatePostPayload>;
   updatePost?: Maybe<UpdatePostPayload>;
   deletePost?: Maybe<DeletePostPayload>;
+  createResponse?: Maybe<CreateResponsePayload>;
+  updateResponse?: Maybe<UpdateResponsePayload>;
+  deleteResponse?: Maybe<DeleteResponsePayload>;
   createTag?: Maybe<CreateTagPayload>;
   updateTag?: Maybe<UpdateTagPayload>;
   deleteTag?: Maybe<DeleteTagPayload>;
@@ -1234,6 +1426,21 @@ export type MutationUpdatePostArgs = {
 
 export type MutationDeletePostArgs = {
   input?: InputMaybe<DeletePostInput>;
+};
+
+
+export type MutationCreateResponseArgs = {
+  input?: InputMaybe<CreateResponseInput>;
+};
+
+
+export type MutationUpdateResponseArgs = {
+  input?: InputMaybe<UpdateResponseInput>;
+};
+
+
+export type MutationDeleteResponseArgs = {
+  input?: InputMaybe<DeleteResponseInput>;
 };
 
 

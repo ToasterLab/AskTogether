@@ -1,4 +1,3 @@
-import React from 'react'
 import type { Post, Organisation as OrganisationType } from 'types'
 import Date from 'utils/Date'
 import Organisation from 'components/Organisation'
@@ -9,11 +8,17 @@ interface Props {
   posts: Post[],
 }
 
+const Timestamp: React.FC<{ timestamp: Post['timestamp']}> = ({ timestamp }) => (
+  <div className="justify-self-end" title={timestamp}>
+    {Date.humanise(timestamp)}
+  </div>
+)
+
 const PostsList: React.FC<Props> = ({ posts }) => {
   return (
     <div className="flex flex-col">
-      {posts.map(post => (
-        <div className="flex flex-col" key={post.id}>
+      {posts.map((post, index) => (
+        <div className={`flex flex-col py-4 ${index === (posts.length - 1) ? `` : `border-b`}`} key={post.id}>
             <a className="mb-3" href="#">
               <h2 className="text-2xl">{post.title}</h2>
             </a>
@@ -34,9 +39,7 @@ const PostsList: React.FC<Props> = ({ posts }) => {
                     )) : null
                 }
               </div>
-              <div className="justify-self-end" title={post.created_at}>
-                {Date.humanise(post.created_at)}
-              </div>
+              <Timestamp timestamp={post.timestamp ? post.timestamp : post.created_at} />
             </div>
         </div>
       ))}

@@ -3,6 +3,7 @@ import GraphQL from 'utils/GraphQL'
 import type { Post } from 'types'
 import PostsList from 'components/PostsList'
 import Layout from 'components/Layout'
+import SearchBox from 'components/SearchBox'
 
 interface Props {
   posts: Post[]
@@ -12,6 +13,7 @@ const Home: NextPage<Props> = ({ posts }) => {
   return (
     <Layout>
       <div className="container max-w-screen-xl mx-auto px-4 mt-8 mb-8">
+        <SearchBox />
         <PostsList posts={posts} />
       </div>
     </Layout>
@@ -24,15 +26,11 @@ export const getStaticProps: GetStaticProps = async () => {
   const { data: { posts } } = await GraphQL.getClient().query({
     query: GraphQL.gql`
       query GetPosts {
-        posts {
+        posts(sort: "timestamp:desc") {
           id
           title
-          content
           created_at
-          author {
-            id
-            username
-          }
+          timestamp
           organisations {
             id
             short_name
