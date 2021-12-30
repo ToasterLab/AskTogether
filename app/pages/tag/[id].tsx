@@ -14,8 +14,11 @@ const Tag: React.FC<Props> = ({ tag, posts }) => {
     <Layout>
       <div className="container max-w-screen-xl mx-auto px-4 mt-8 mb-8">
         <div className="flex flex-row border-b pb-4">
-          <div className="mr-4 font-semibold">Tag: </div>
-          <div>{tag.name}</div>
+          <div className="mr-4 font-semibold text-xl">Tag: </div>
+          <div>
+            <div className="text-xl">{tag.name}</div>
+            <div className="">{tag.description}</div>
+          </div>
         </div>
         <PostsList posts={posts} />
       </div>
@@ -37,6 +40,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
         tag(id: $id) {
           id
           name
+          description
         }
         posts(where: { tags: { id: $id} } ) {
           id

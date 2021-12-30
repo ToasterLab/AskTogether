@@ -1,6 +1,15 @@
 # only used for development
 version: "3"
 services:
+  app:
+    build:
+      context: ./app
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - strapi
+
   strapi:
     image: strapi/strapi:3.6.8-alpine
     environment:
@@ -28,7 +37,7 @@ services:
     volumes:
       - asktogether-db:/var/lib/postgresql/data
     ports:
-      - "27017:27017"
+      - "5432:5432"
 
 volumes:
   asktogether-db:

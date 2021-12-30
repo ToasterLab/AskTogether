@@ -22,7 +22,7 @@ const PostsList: React.FC<Props> = ({ posts }) => {
         <div className={`flex flex-col py-4 ${index === (posts.length - 1) ? `` : `border-b`}`} key={post.id}>
             <Link href={`/post/${post.id}`}>
               <a className="mb-3">
-                <h2 className="text-2xl">{post.title}</h2>
+                <h2 className="text-xl">{post.title}</h2>
               </a>
             </Link>
             <div className="flex flex-row items-center gap-5">

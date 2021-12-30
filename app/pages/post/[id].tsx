@@ -5,7 +5,6 @@ import type { GetStaticPaths, GetStaticProps } from 'next'
 import GraphQL from 'utils/GraphQL'
 import Date from 'utils/Date'
 import { mdToHTML } from 'utils'
-import { IoMail } from 'react-icons/io5'
 import Link from 'next/link'
 import Tag from 'components/Tag'
 
@@ -94,7 +93,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
             short_name
           }
         }
-        responses(where: { post: { id: $id } }){
+        responses(where: { post: { id: $id } }, sort: "timestamp:asc"){
           id
           title
           content

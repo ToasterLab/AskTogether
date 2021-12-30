@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "responses",
+  "info": {
+    "name": "Response",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": false
+    },
+    "content": {
+      "type": "richtext",
+      "required": true
+    },
+    "post": {
+      "model": "post"
+    },
+    "timestamp": {
+      "type": "datetime"
+    },
+    "from": {
+      "type": "enumeration",
+      "enum": [
+        "user",
+        "organisation"
+      ],
+      "required": true
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "organisation": {
+      "model": "organisation"
+    }
+  }
+}
