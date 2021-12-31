@@ -71,7 +71,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   return {
     props: {
       organisation,
-      posts
+      posts,
     },
   }
 }
@@ -87,12 +87,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
           id
         }
       }
-    `
+    `,
   })
   return {
-    paths: organisations.map(org => ({
-      params: { id: org.id }
-    })),
     fallback: `blocking`,
+    paths: organisations.map(org => ({
+      params: { id: org.id },
+    })),
   }
 }

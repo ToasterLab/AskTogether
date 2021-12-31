@@ -1,15 +1,14 @@
-import type { Post, Organisation as OrganisationType } from 'types'
+import type { Post, Organisation as OrganisationType , Tag as TagType } from 'types'
 import Date from 'utils/Date'
 import Organisation from 'components/Organisation'
 import Tag from 'components/Tag'
-import type { Tag as TagType } from 'types'
 import Link from 'next/link'
 
 interface Props {
   posts: Post[],
 }
 
-const Timestamp: React.FC<{ timestamp: Post['timestamp']}> = ({ timestamp }) => (
+const Timestamp: React.FC<{ timestamp: Post[`timestamp`]}> = ({ timestamp }) => (
   <div className="justify-self-end text-sm" title={timestamp}>
     {Date.humanise(timestamp)}
   </div>
@@ -21,7 +20,7 @@ const PostsList: React.FC<Props> = ({ posts }) => {
       {posts.map((post, index) => (
         <div className={`flex flex-col py-4 ${index === (posts.length - 1) ? `` : `border-b`}`} key={post.id}>
             <Link href={`/post/${post.id}`}>
-              <a className="mb-3">
+              <a className="mb-3 hover:text-gray-500">
                 <h2 className="text-xl">{post.title}</h2>
               </a>
             </Link>
@@ -30,7 +29,7 @@ const PostsList: React.FC<Props> = ({ posts }) => {
                 {
                   post.organisations
                     ? (post.organisations as OrganisationType[]).map(
-                        (org) => (<Organisation org={org} key={org.id} />)
+                        (org) => (<Organisation org={org} key={org.id} />),
                     ) : null
                 }
               </div>

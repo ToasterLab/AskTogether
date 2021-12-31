@@ -1,15 +1,6 @@
 # only used for development
 version: "3"
 services:
-  app:
-    build:
-      context: ./app
-      dockerfile: ./Dockerfile
-    ports:
-      - "3000:3000"
-    depends_on:
-      - strapi
-
   strapi:
     image: strapi/strapi:3.6.8-alpine
     environment:
