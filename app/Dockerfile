@@ -9,9 +9,6 @@ WORKDIR /app
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001
 
-ENV NEXT_PUBLIC_STRAPI_URI http://asktogether-strapi.home.xn--7qv.org
-ENV GRAPHQL_URI http://asktogether-strapi.home.xn--7qv.org/graphql
-
 COPY . ./
 RUN npm i && npm run build
 
