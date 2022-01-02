@@ -22,6 +22,7 @@ module.exports = {
       `always-multiline`,
     ],
     "jsx-a11y/accessible-emoji": `off`,
+    "jsx-a11y/anchor-is-valid": `off`,
     "prefer-const": `warn`,
     quotes: [
       `error`,
@@ -33,17 +34,7 @@ module.exports = {
     ],
     "sonarjs/no-nested-template-literals": `off`,
     "sort-keys-fix/sort-keys-fix": `warn`,
-    "unicorn/filename-case": [
-      `error`,
-      {
-        cases: {
-          camelCase: true,
-          pascalCase: true,
-        },
-        ignore: [
-        ],
-      },
-    ],
+    "unicorn/filename-case": `off`,
     "unicorn/no-null": 0,
     "unicorn/prefer-module": [
       `off`,

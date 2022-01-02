@@ -1,7 +1,7 @@
 import Link from 'next/link'
-import { IoMail } from 'react-icons/io5'
 import type { Response as ResponseType } from 'types'
 import Date from 'utils/Date'
+import { mdToHTML } from 'utils'
 
 interface Props { response: ResponseType }
 
@@ -30,7 +30,7 @@ const Response: React.FC<Props> = ({ response }) => {
       <div className="px-4 py-4">
         <div
           className="prose max-w-none text-black prose-p:my-2"
-          dangerouslySetInnerHTML={{ __html: response.content }} />
+          dangerouslySetInnerHTML={{ __html: mdToHTML(response.content) }} />
       </div>
     </div>
   )

@@ -13,7 +13,7 @@ interface Properties {
 }
 
 const Home: NextPage<Properties> = ({ posts, featured }) => {
-  const { loading, data, error } = GraphQL.useQuery(query)
+  const { loading, data, error } = GraphQL.useQuery<GetHomeContentQuery>(query)
   return (
     <Layout>
       <Head>
@@ -23,10 +23,10 @@ const Home: NextPage<Properties> = ({ posts, featured }) => {
         <SearchBox />
         <div className="w-full flex lg:flex-row flex-col gap-4">
           <div className="lg:w-3/4 w-full">
-            <PostsList posts={(loading || error) ? posts : data.posts} />
+            <PostsList posts={(loading || error || !data) ? posts : data.posts} />
           </div>
           <div className="lg:w-1/4 w-full">
-            <Featured data={(loading || error) ? featured : data.featured} />
+            <Featured data={(loading || error || !data) ? featured : data.featured} />
           </div>
         </div>
       </div>
