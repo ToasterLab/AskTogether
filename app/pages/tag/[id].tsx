@@ -64,8 +64,8 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   })
   return {
     props: {
+      posts,
       tag,
-      posts
     },
   }
 }
@@ -81,12 +81,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
           id
         }
       }
-    `
+    `,
   })
   return {
-    paths: tags.map(tag => ({
-      params: { id: tag.id }
-    })),
     fallback: `blocking`,
+    paths: tags.map(tag => ({
+      params: { id: tag.id },
+    })),
   }
 }

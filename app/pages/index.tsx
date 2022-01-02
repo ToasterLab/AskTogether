@@ -1,4 +1,4 @@
-import type { NextPage, GetServerSideProps } from 'next'
+import type { NextPage, GetStaticProps } from 'next'
 import GraphQL from 'utils/GraphQL'
 import type { Featured as FeaturedType, Post } from 'types'
 import PostsList from 'components/PostsList'
@@ -13,6 +13,7 @@ interface Properties {
 }
 
 const Home: NextPage<Properties> = ({ posts, featured }) => {
+  const { loading, data, error } = GraphQL.useQuery(query)
   return (
     <Layout>
       <Head>
@@ -22,10 +23,10 @@ const Home: NextPage<Properties> = ({ posts, featured }) => {
         <SearchBox />
         <div className="w-full flex lg:flex-row flex-col gap-4">
           <div className="lg:w-3/4 w-full">
-            <PostsList posts={posts} />
+            <PostsList posts={(loading || error) ? posts : data.posts} />
           </div>
           <div className="lg:w-1/4 w-full">
-            <Featured data={featured} />
+            <Featured data={(loading || error) ? featured : data.featured} />
           </div>
         </div>
       </div>
@@ -40,37 +41,39 @@ type GetHomeContentQuery = {
   featured: FeaturedType,
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const { data: { posts, featured } } = await GraphQL.getClient().query<GetHomeContentQuery>({
-    query: GraphQL.gql`
-      query GetHomeContent {
-        posts(sort: "timestamp:desc") {
-          id
-          title
-          created_at
-          timestamp
-          organisations {
-            id
-            short_name
-          }
-          tags {
-            id
-            name
-          }
-        }
-
-        featured {
-          organisations {
-            id
-            short_name
-          }
-          tags {
-            id
-            name
-          }
-        }
+const query = GraphQL.gql`
+  query GetHomeContent {
+    posts(sort: "timestamp:desc") {
+      id
+      title
+      created_at
+      timestamp
+      organisations {
+        id
+        short_name
       }
-    `,
+      tags {
+        id
+        name
+      }
+    }
+
+    featured {
+      organisations {
+        id
+        short_name
+      }
+      tags {
+        id
+        name
+      }
+    }
+  }
+`
+
+export const getStaticProps: GetStaticProps = async () => {
+  const { data: { posts, featured } } = await GraphQL.getClient().query<GetHomeContentQuery>({
+    query,
   })
   return {
     props: {

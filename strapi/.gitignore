@@ -1,0 +1,9 @@
+/*
+/*/
+
+!/.gitignore
+!/api/
+
+!/config/
+/config/*
+!/config/middlewares.js
