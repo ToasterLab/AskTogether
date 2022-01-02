@@ -13,9 +13,7 @@ const Header: React.FC = () => {
           <Link href="/about">
             <a className="hover:text-black">About</a>
           </Link>
-          <Link href="/submit">
-            <a className="hover:text-black">Submit</a>
-          </Link>
+          <a className="hover:text-black" href="https://is25icte78n.typeform.com/to/ulE3sOKc">Submit</a>
         </div>
       </div>
     </header>

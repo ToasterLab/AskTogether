@@ -9,10 +9,11 @@ import type {
 import type { GetStaticPaths, GetStaticProps } from 'next'
 import GraphQL from 'utils/GraphQL'
 import Date from 'utils/Date'
-import { mdToHTML } from 'utils'
+import { mdToHTML, mdToText } from 'utils'
 import Tag from 'components/Tag'
 import Organisation from 'components/Organisation'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 
 type Props = {
@@ -30,6 +31,15 @@ const PostDetail: React.FC<Props> = ({ post, responses }) => {
   const r = (loading || error || !data) ? responses : (data as GetPostQueryType)?.responses
   return (
     <Layout>
+      <Head>
+        <title>AskTogether | {p.title}</title>
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={p.title} />
+        <meta property="og:url" content={`https://ask.tgt.sg/post/${p.id}`} />
+        <meta property="og:description" content={mdToText(p.content).slice(0, 199)+`…`} />
+        <meta property="article:published_time" content={p.timestamp} />
+        {p.tags && <meta property="article:tag" content={(p.tags as TagType[]).map(t => t.name).join(`,`)} />}
+      </Head>
       <div className="container max-w-screen-xl mx-auto px-4 mt-8 mb-8">
         <div className="flex flex-col gap-6">
           <div className="border rounded">
