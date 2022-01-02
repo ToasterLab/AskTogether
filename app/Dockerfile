@@ -10,11 +10,11 @@ RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001
 
 COPY . ./
-RUN npm i
+RUN npm i && npm run build
 
 ENV NODE_ENV production
 USER nextjs
 
 EXPOSE 3000
 
-CMD "npm run build && npm run start"
+CMD ["sh" "-c", "npm run start"]

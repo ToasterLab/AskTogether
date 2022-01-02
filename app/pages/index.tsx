@@ -1,4 +1,4 @@
-import type { NextPage, GetStaticProps } from 'next'
+import type { NextPage, GetServerSideProps } from 'next'
 import GraphQL from 'utils/GraphQL'
 import type { Featured as FeaturedType, Post } from 'types'
 import PostsList from 'components/PostsList'
@@ -40,7 +40,7 @@ type GetHomeContentQuery = {
   featured: FeaturedType,
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const { data: { posts, featured } } = await GraphQL.getClient().query<GetHomeContentQuery>({
     query: GraphQL.gql`
       query GetHomeContent {
