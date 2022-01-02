@@ -5,6 +5,7 @@ import PostsList from 'components/PostsList'
 import Layout from 'components/Layout'
 import SearchBox from 'components/SearchBox'
 import Featured from 'components/Featured'
+import Head from 'next/head'
 
 interface Properties {
   posts: Post[],
@@ -14,13 +15,16 @@ interface Properties {
 const Home: NextPage<Properties> = ({ posts, featured }) => {
   return (
     <Layout>
+      <Head>
+        <title>AskTogether | Home</title>
+      </Head>
       <div className="container max-w-screen-xl mx-auto px-4 mt-8 mb-8">
         <SearchBox />
-        <div className="w-full flex flex-row gap-4">
-          <div className="w-3/4">
+        <div className="w-full flex lg:flex-row flex-col gap-4">
+          <div className="lg:w-3/4 w-full">
             <PostsList posts={posts} />
           </div>
-          <div className="w-1/4">
+          <div className="lg:w-1/4 w-full">
             <Featured data={featured} />
           </div>
         </div>

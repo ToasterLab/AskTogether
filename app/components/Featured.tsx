@@ -9,7 +9,7 @@ interface Props {
 const Featured: React.FC<Props> = ({ data }) => {
 
   return (
-    <div className="my-4 px-4 border-l h-full">
+    <div className="my-4 lg:px-4 pt-4 lg:border-l border-t h-full">
       <h2 className="mb-4 text-lg font-semibold">Featured</h2>
       <div className="flex flex-row gap-2 flex-wrap">
         {data.organisations && data.organisations.map(org => org && (
