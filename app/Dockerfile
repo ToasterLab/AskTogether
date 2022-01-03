@@ -10,7 +10,7 @@ RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001
 
 COPY . ./
-RUN npm i && npm run build
+RUN npm i && npm run build && chown nextjs:nodejs /app -R
 
 ENV NODE_ENV production
 USER nextjs
