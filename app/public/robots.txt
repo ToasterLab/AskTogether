@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://ask.tgt.sg
+
+# Sitemaps
+Sitemap: https://ask.tgt.sg/sitemap.xml
